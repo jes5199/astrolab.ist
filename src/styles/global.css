@@ -37,7 +37,7 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: #f5f5dc;
+	background: black;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: black;
@@ -48,6 +48,10 @@ main {
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
+	background: #f5f5dc;
+}
+footer {
+	background: #f5f5dc;
 }
 h1,
 h2,
