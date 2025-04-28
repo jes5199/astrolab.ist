@@ -48,10 +48,6 @@ main {
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
-	background: #f5f5dc;
-}
-footer {
-	background: #f5f5dc;
 }
 h1,
 h2,
