@@ -43,8 +43,6 @@ body {
 	color: black;
 	font-size: 20px;
 	line-height: 1.7;
-	padding-left: env(safe-area-inset-left);
-	padding-right: env(safe-area-inset-right);
 }
 main {
 	max-width: calc(100% - 2em);
