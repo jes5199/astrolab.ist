@@ -153,3 +153,19 @@ hr {
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
+
+body::before, body::after {
+	content: "";
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: env(safe-area-inset-left);
+	background: black;
+	z-index: 999;
+	pointer-events: none;
+}
+body::after {
+	left: auto;
+	right: 0;
+	width: env(safe-area-inset-right);
+}
