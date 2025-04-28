@@ -37,7 +37,7 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: black;
+	background: #f5f5dc;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: black;
@@ -156,8 +156,4 @@ hr {
 	clip-path: inset(50%);
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
-}
-
-html {
-	background: black;
 }
