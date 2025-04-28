@@ -23,6 +23,36 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			<div style="text-align: center; margin-top: 2rem;">
 				<a href="https://buy.stripe.com/28oaHddjb30FdIk6op" style="display: inline-block; background-color: #635BFF; color: white; padding: 1rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: bold; transition: background-color 0.2s;">Buy Astrolabe Elements Pendant - $35</a>
 			</div>
+			
+			<div style="max-width: 600px; margin: 4rem auto; padding: 0 1rem; text-align: center;">
+				<h2 style="margin-bottom: 1rem;">stay updated on new art</h2>
+				<form
+					action="https://buttondown.com/api/emails/embed-subscribe/astrolabist"
+					method="post"
+					target="popupwindow"
+					onsubmit="window.open('https://buttondown.com/astrolabist', 'popupwindow')"
+					class="embeddable-buttondown-form"
+					style="display: flex; flex-direction: column; gap: 1rem; align-items: center;"
+				>
+					<label for="bd-email" style="font-weight: bold;">Enter your email</label>
+					<input 
+						type="email" 
+						name="email" 
+						id="bd-email" 
+						style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 0.25rem; width: 100%; max-width: 300px;"
+						required
+					/>
+					
+					<input 
+						type="submit" 
+						value="Subscribe" 
+						style="background-color: #635BFF; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 0.25rem; cursor: pointer; font-weight: bold;"
+					/>
+					<p style="font-size: 0.875rem; color: #666;">
+						<a href="https://buttondown.com/refer/astrolabist" target="_blank" style="color: #635BFF;">Powered by Buttondown.</a>
+					</p>
+				</form>
+			</div>
 		</main>
 		<Footer />
 	</body>
