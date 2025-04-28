@@ -5,7 +5,7 @@ import { SITE_TITLE } from '../consts';
 
 <header>
 	<nav>
-		<h2><a href="/"><img src="/astrolabist.png" alt="Astrolabist" height="28" /></a></h2>
+		<h2><a href="/"><img src="/astrolabist.png" alt="Astrolabist" /></a></h2>
 		<div class="internal-links">
 			<!--<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
@@ -16,12 +16,14 @@ import { SITE_TITLE } from '../consts';
 <style>
 	header {
 		margin: 0;
-		padding: 0 1em;
-		background: var(--black);
+		padding: 0;
+		background: #FFFFFF;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	}
 	h2 {
 		margin: 0;
 		font-size: 1em;
+		padding: 0.5em 1em;
 	}
 
 	h2 a,
@@ -31,7 +33,7 @@ import { SITE_TITLE } from '../consts';
 		align-items: center;
 	}
 	h2 img {
-		height: 100px;
+		height: 90px;
 		width: auto;
 	}
 	nav {
@@ -41,7 +43,7 @@ import { SITE_TITLE } from '../consts';
 	}
 	nav a {
 		padding: 1em 0.5em;
-		color: var(--white);
+		color: var(--black);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
 	}
