@@ -19,12 +19,12 @@ import { SITE_TITLE } from '../consts';
 		padding: 0;
 		background: #FFFFFF;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-		width: 100vw;
+		width: auto;
 		position: relative;
-		left: 50%;
-		right: 50%;
-		margin-left: -50vw;
-		margin-right: -50vw;
+		left: unset;
+		right: unset;
+		margin-left: calc(-1 * env(safe-area-inset-left));
+		margin-right: calc(-1 * env(safe-area-inset-right));
 		padding-left: env(safe-area-inset-left);
 		padding-right: env(safe-area-inset-right);
 	}
