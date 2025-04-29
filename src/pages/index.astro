@@ -26,9 +26,9 @@ const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
 				<a 
 					id="add-to-cart-btn"
 					href="#"
-					style="display: inline-block; background-color: #635BFF; color: white; padding: 1rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: bold; transition: background-color 0.2s;"
+					style="display: inline-block; background-color: #635BFF; color: white; padding: 1rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: bold; transition: background-color 0.2s; font-family: 'Atkinson', sans-serif; font-size: 20px;"
 				>
-					{BUTTON_TEXT}
+					Buy Astrolabe Elements Pendant - $35
 				</a>
 			</div>
 			
@@ -76,32 +76,108 @@ const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
 			</div>
 		</main>
 		<Footer />
-		<script type="module" client:load define:vars={{ BUTTON_TEXT }}>
-			import { Cart } from '../cart.js';
-			
-			// Function to handle adding to cart
-			function addToCart(event) {
-				event.preventDefault();
-				Cart.addItem('prod_SDOil8nBU1UUGg');
-				const link = document.getElementById('add-to-cart-btn');
-				if (link) {
-					link.textContent = 'Added to Cart';
-					link.style.backgroundColor = '#4CAF50';
-					setTimeout(() => {
-						if (link) {
-							link.textContent = BUTTON_TEXT;
-							link.style.backgroundColor = '#635BFF';
-						}
-					}, 2000);
+		<!-- Cart Modal -->
+		<div id="cart-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
+			<div style="background:white; padding:2rem; border-radius:8px; width:90%; max-width:400px;">
+				<h2>Your Cart</h2>
+				<ul id="cart-items" style="list-style:none; padding:0; margin:1rem 0;"></ul>
+				<div style="display:flex; justify-content:space-between; margin-top:1rem;">
+					<button id="keep-shopping-btn" style="padding:0.5rem 1rem; border:none; background:#ccc; border-radius:4px; cursor:pointer;">Keep Shopping</button>
+					<button id="pay-btn" style="padding:0.5rem 1rem; border:none; background:#635BFF; color:white; border-radius:4px; cursor:pointer;">Pay</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Floating Cart Button -->
+		<button id="open-cart-btn" style="display:none; position:fixed; bottom:1rem; right:1rem; width:60px; height:60px; border-radius:50%; background-color:var(--accent); color:white; font-weight:bold; font-size:16px; align-items:center; justify-content:center; cursor:pointer; font-family:'Atkinson', sans-serif; box-shadow:0 2px 6px rgba(var(--gray),25%), 0 8px 24px rgba(var(--gray),33%); display:flex;">
+			<span>BUY</span><span id="cart-count" style="position:absolute; top:-4px; right:-4px; background:#4CAF50; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; font-size:12px;">0</span>
+		</button>
+
+		<script type="module">
+			import { Cart } from '/cart.js';
+			const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
+
+			function updateCartUI() {
+				const count = Cart.getItems().reduce((sum, item) => sum + item.quantity, 0);
+				const openBtn = document.getElementById('open-cart-btn');
+				const cartCount = document.getElementById('cart-count');
+				if (openBtn && cartCount) {
+					if (count > 0) {
+						openBtn.style.display = 'flex';
+						cartCount.textContent = count;
+					} else {
+						openBtn.style.display = 'none';
+					}
 				}
 			}
 
-			// Add click event listener when the script loads
-			document.addEventListener('DOMContentLoaded', () => {
-				const link = document.getElementById('add-to-cart-btn');
-				if (link) {
-					link.addEventListener('click', addToCart);
+			function showModal() {
+				const modal = document.getElementById('cart-modal');
+				if (modal) {
+					modal.style.display = 'flex';
 				}
+			}
+
+			function hideModal() {
+				const modal = document.getElementById('cart-modal');
+				if (modal) {
+					modal.style.display = 'none';
+				}
+			}
+
+			function renderCartItems() {
+				const items = Cart.getItems();
+				const itemsList = document.getElementById('cart-items');
+				if (itemsList) {
+					itemsList.innerHTML = '';
+					items.forEach(item => {
+						const li = document.createElement('li');
+						li.textContent = `${item.priceId} x ${item.quantity}`;
+						itemsList.appendChild(li);
+					});
+				}
+			}
+
+			function openCart(event) {
+				event.preventDefault();
+				renderCartItems();
+				showModal();
+			}
+
+			function handleAddToCart(event) {
+				event.preventDefault();
+				Cart.addItem('prod_SDOil8nBU1UUGg');
+				renderCartItems();
+				updateCartUI();
+				showModal();
+			}
+
+			document.addEventListener('DOMContentLoaded', () => {
+				// Hide modal on initial load
+				hideModal();
+				updateCartUI();
+				const addBtn = document.getElementById('add-to-cart-btn');
+				addBtn?.addEventListener('click', handleAddToCart);
+
+				const openBtn = document.getElementById('open-cart-btn');
+				openBtn?.addEventListener('click', openCart);
+
+				const keepBtn = document.getElementById('keep-shopping-btn');
+				keepBtn?.addEventListener('click', (e) => {
+					e.preventDefault();
+					hideModal();
+				});
+
+				const payBtn = document.getElementById('pay-btn');
+				payBtn?.addEventListener('click', (e) => {
+					e.preventDefault();
+					alert('Payment flow not implemented yet.');
+				});
+
+				window.addEventListener('storage', () => {
+					updateCartUI();
+					renderCartItems();
+				});
 			});
 		</script>
 	</body>
