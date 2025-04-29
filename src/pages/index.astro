@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
+const SHIPPING = 5;
 ---
 
 <!doctype html>
@@ -79,8 +80,8 @@ const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
 		<!-- Cart Modal -->
 		<div id="cart-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
 			<div style="background:white; padding:2rem; border-radius:8px; width:90%; max-width:400px;">
-				<h2>Your Cart</h2>
 				<ul id="cart-items" style="list-style:none; padding:0; margin:1rem 0;"></ul>
+				<div id="cart-total" style="font-weight:bold; margin-bottom:1rem;">Total: $0</div>
 				<div style="display:flex; justify-content:space-between; margin-top:1rem;">
 					<button id="keep-shopping-btn" style="padding:0.5rem 1rem; border:none; background:#ccc; border-radius:4px; cursor:pointer;">Keep Shopping</button>
 					<button id="pay-btn" style="padding:0.5rem 1rem; border:none; background:#635BFF; color:white; border-radius:4px; cursor:pointer;">Pay</button>
@@ -95,7 +96,12 @@ const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
 
 		<script type="module">
 			import { Cart } from '/cart.js';
+			const SHIPPING = 5;
 			const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
+			// Mapping of product IDs to display names and prices
+			const PRODUCTS = {
+				prod_SDOil8nBU1UUGg: { name: 'Astrolabe Elements Pendant', price: 30 },
+			};
 
 			function updateCartUI() {
 				const count = Cart.getItems().reduce((sum, item) => sum + item.quantity, 0);
@@ -128,13 +134,28 @@ const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
 			function renderCartItems() {
 				const items = Cart.getItems();
 				const itemsList = document.getElementById('cart-items');
+				const totalEl = document.getElementById('cart-total');
+				let subtotal = 0;
 				if (itemsList) {
 					itemsList.innerHTML = '';
 					items.forEach(item => {
+						const prod = PRODUCTS[item.priceId] || { name: item.priceId, price: 0 };
+						const lineTotal = prod.price * item.quantity;
 						const li = document.createElement('li');
-						li.textContent = `${item.priceId} x ${item.quantity}`;
+						li.textContent = `${prod.name} x ${item.quantity} — $${lineTotal}`;
 						itemsList.appendChild(li);
+						subtotal += lineTotal;
 					});
+					// Charge shipping once per cart
+					if (items.length > 0) {
+						const liShip = document.createElement('li');
+						liShip.textContent = `Shipping — $${SHIPPING}`;
+						itemsList.appendChild(liShip);
+					}
+				}
+				if (totalEl) {
+					const total = subtotal + (items.length > 0 ? SHIPPING : 0);
+					totalEl.textContent = `Total: $${total}`;
 				}
 			}
 
