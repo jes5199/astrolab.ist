@@ -1,0 +1,65 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Order Canceled - ${SITE_TITLE}`} description="Your order was not completed" />
+	</head>
+	<body>
+		<Header />
+		<main style="max-width: 600px; margin: 4rem auto; padding: 0 1rem; text-align: center;">
+			<h1 style="margin-bottom: 2rem;">Your order was not completed</h1>
+			<p style="margin-bottom: 2rem;">Something went wrong with the checkout process. You can try again or contact us if you need help.</p>
+			
+			<div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+				<a 
+					href="/"
+					style="display: inline-block; background-color: #635BFF; color: white; padding: 0.75rem 1.5rem; border-radius: 0.25rem; text-decoration: none; font-weight: bold;"
+				>
+					Try Again
+				</a>
+				<a 
+					href="mailto:jes@astrolab.ist"
+					style="display: inline-block; background-color: #ccc; color: black; padding: 0.75rem 1.5rem; border-radius: 0.25rem; text-decoration: none; font-weight: bold;"
+				>
+					Contact Me Directly
+				</a>
+			</div>
+
+			<p style="margin-bottom: 2rem;">Sign up for my mailing list to find out when new things launch</p>
+			
+			<form
+				action="https://buttondown.com/api/emails/embed-subscribe/astrolabist"
+				method="post"
+				target="popupwindow"
+				onsubmit="window.open('https://buttondown.com/astrolabist', 'popupwindow')"
+				class="embeddable-buttondown-form"
+				style="display: flex; flex-direction: column; gap: 1rem; align-items: center;"
+			>
+				<label for="bd-email" style="font-weight: bold;">Enter your email</label>
+				<input 
+					type="email" 
+					name="email" 
+					id="bd-email" 
+					style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 0.25rem; width: 100%; max-width: 300px;"
+					required
+				/>
+				
+				<input 
+					type="submit" 
+					value="Subscribe" 
+					style="background-color: #635BFF; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 0.25rem; cursor: pointer; font-weight: bold;"
+				/>
+				<p style="font-size: 0.875rem; color: #666;">
+					<a href="https://buttondown.com/refer/astrolabist" target="_blank" style="color: #635BFF;">Powered by Buttondown.</a>
+				</p>
+			</form>
+		</main>
+		<Footer />
+	</body>
+</html> 
