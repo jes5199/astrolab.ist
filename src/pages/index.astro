@@ -3,6 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
 ---
 
 <!doctype html>
@@ -21,7 +23,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				<img src="/astrolabe-elements-documentation.png" alt="Astrolabe Elements Documentation" style="max-height: 450px; width: auto; object-fit: contain;" />
 			</div>
 			<div style="text-align: center; margin-top: 2rem;">
-				<a href="https://buy.stripe.com/28oaHddjb30FdIk6op" style="display: inline-block; background-color: #635BFF; color: white; padding: 1rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: bold; transition: background-color 0.2s;">Buy Astrolabe Elements Pendant - $35</a>
+				<a 
+					id="add-to-cart-btn"
+					href="#"
+					style="display: inline-block; background-color: #635BFF; color: white; padding: 1rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: bold; transition: background-color 0.2s;"
+				>
+					{BUTTON_TEXT}
+				</a>
 			</div>
 			
 			<div style="max-width: 600px; margin: 4rem auto; padding: 0 1rem; text-align: center;">
@@ -68,5 +76,33 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			</div>
 		</main>
 		<Footer />
+		<script type="module" client:load define:vars={{ BUTTON_TEXT }}>
+			import { Cart } from '../cart.js';
+			
+			// Function to handle adding to cart
+			function addToCart(event) {
+				event.preventDefault();
+				Cart.addItem('prod_SDOil8nBU1UUGg');
+				const link = document.getElementById('add-to-cart-btn');
+				if (link) {
+					link.textContent = 'Added to Cart';
+					link.style.backgroundColor = '#4CAF50';
+					setTimeout(() => {
+						if (link) {
+							link.textContent = BUTTON_TEXT;
+							link.style.backgroundColor = '#635BFF';
+						}
+					}, 2000);
+				}
+			}
+
+			// Add click event listener when the script loads
+			document.addEventListener('DOMContentLoaded', () => {
+				const link = document.getElementById('add-to-cart-btn');
+				if (link) {
+					link.addEventListener('click', addToCart);
+				}
+			});
+		</script>
 	</body>
 </html>
