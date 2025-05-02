@@ -273,8 +273,7 @@ const SHIPPING = 5;
 							throw new Error('No redirect URL provided');
 						}
 
-						// Clear the cart before redirecting
-						Cart.clear();
+						// Hide modal before redirecting
 						hideModal();
 						updateCartUI();
 						// Redirect to the Stripe checkout URL
