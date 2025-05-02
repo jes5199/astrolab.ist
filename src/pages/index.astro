@@ -253,7 +253,8 @@ const SHIPPING = 5;
 								domain: 'astrolab.ist',
 								items: items.map(item => ({
 									priceId: item.priceId,
-									quantity: item.quantity
+									quantity: item.quantity,
+									isPhysicalMail: true,
 								}))
 							})
 						});
