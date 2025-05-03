@@ -33,6 +33,21 @@ const SHIPPING = 5;
 				</a>
 			</div>
 			
+			<div style="display: flex; justify-content: center; gap: 1rem; margin-top: 4rem; max-width: 2000px; margin-left: auto; margin-right: auto; flex-wrap: wrap;">
+				<img src="/venus-orbit-epicycle-package.jpg" alt="Venus Orbit Epicycle Package" style="max-height: 450px; width: auto; object-fit: contain;" />
+				<img src="/venus-orbit-epicycle-documentation1.png" alt="Venus Orbit Epicycle Documentation 1" style="max-height: 450px; width: auto; object-fit: contain;" />
+				<img src="/venus-orbit-epicycle-documentation2.png" alt="Venus Orbit Epicycle Documentation 2" style="max-height: 450px; width: auto; object-fit: contain;" />
+			</div>
+			<div style="text-align: center; margin-top: 2rem;">
+				<a 
+					id="add-to-cart-btn-venus"
+					href="#"
+					style="display: inline-block; background-color: #635BFF; color: white; padding: 1rem 2rem; border-radius: 0.5rem; text-decoration: none; font-weight: bold; transition: background-color 0.2s; font-family: 'Atkinson', sans-serif; font-size: 20px;"
+				>
+					Buy Venus Orbit Epicycle - $36.63
+				</a>
+			</div>
+			
 			<div style="max-width: 600px; margin: 4rem auto; padding: 0 1rem; text-align: center;">
 				<h2 style="margin-bottom: 1rem;">stay updated on new art</h2>
 				<form
@@ -103,8 +118,11 @@ const SHIPPING = 5;
 			const SHIPPING = 5;
 			const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
 			// Mapping of product IDs to display names and prices
+			// note that this does not include the shipping cost
+			// but I include the shipping cost on the "Buy this" buttons
 			const PRODUCTS = {
 				price_1RIy7IFP96aIwR2hBxHF2Kq6: { name: 'Astrolabe Elements Pendant', price: 30 },
+				price_1QfVfMFP96aIwR2haxAysFVG: { name: 'Venus Orbit Epicycle', price: 31.63 },
 			};
 
 			function updateCartUI() {
@@ -170,7 +188,7 @@ const SHIPPING = 5;
 						});
 
 						const totalSpan = document.createElement('span');
-						totalSpan.textContent = `$${lineTotal}`;
+						totalSpan.textContent = `$${lineTotal.toFixed(2)}`;
 
 						const removeBtn = document.createElement('button');
 						removeBtn.textContent = '×';
@@ -198,13 +216,13 @@ const SHIPPING = 5;
 					if (items.length > 0) {
 						const liShip = document.createElement('li');
 						liShip.style.textAlign = 'right';
-						liShip.textContent = `Shipping:  $${SHIPPING}`;
+						liShip.textContent = `Shipping:  $${SHIPPING.toFixed(2)}`;
 						itemsList.appendChild(liShip);
 					}
 				}
 				if (totalEl) {
 					const total = subtotal + (items.length > 0 ? SHIPPING : 0);
-					totalEl.textContent = `Total: $${total}`;
+					totalEl.textContent = `Total: $${total.toFixed(2)}`;
 				}
 			}
 
@@ -228,6 +246,15 @@ const SHIPPING = 5;
 				updateCartUI();
 				const addBtn = document.getElementById('add-to-cart-btn');
 				addBtn?.addEventListener('click', handleAddToCart);
+
+				const addBtnVenus = document.getElementById('add-to-cart-btn-venus');
+				addBtnVenus?.addEventListener('click', (event) => {
+					event.preventDefault();
+					Cart.addItem('price_1QfVfMFP96aIwR2haxAysFVG');
+					renderCartItems();
+					updateCartUI();
+					showModal();
+				});
 
 				const openBtn = document.getElementById('open-cart-btn');
 				openBtn?.addEventListener('click', openCart);
