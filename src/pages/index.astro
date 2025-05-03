@@ -240,7 +240,7 @@ const SHIPP = 5;
 						const liShip = document.createElement('li');
 						liShip.style.display = 'flex';
 						liShip.style.justifyContent = 'flex-end';
-						liShip.style.marginBottom = '0.5rem';
+						liShip.style.marginBottom = '0';
 						
 						const shippingText = document.createElement('span');
 						shippingText.textContent = `Shipping:`;
@@ -280,6 +280,7 @@ const SHIPP = 5;
 					
 					totalEl.style.display = 'flex';
 					totalEl.style.justifyContent = 'flex-end';
+					totalEl.style.marginTop = '-8px'; // Add negative margin to pull it closer
 					totalEl.appendChild(totalText);
 					totalEl.appendChild(totalPrice);
 					totalEl.appendChild(spacer);
