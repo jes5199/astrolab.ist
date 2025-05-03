@@ -4,8 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
-const SHIPPING = 5;
+const SHIPP = 5;
 ---
 
 <!doctype html>
@@ -102,7 +101,7 @@ const SHIPPING = 5;
 					<input type="text" id="discount-code" style="width:50%; padding:0.25rem; border:1px solid #ccc; border-radius:4px; font-size:0.85rem;">
 				</div>
 				<div style="display:flex; justify-content:space-between; margin-top:1rem;">
-					<button id="keep-shopping-btn" style="padding:0.5rem 1rem; border:none; background:#ccc; border-radius:4px; cursor:pointer;">Keep Shopping</button>
+					<button id="keep-shopping-btn" style="padding:0.5rem 1rem; border:none; background:#ccc; border-radius:4px; cursor:pointer;">Keep Browsing</button>
 					<button id="pay-btn" style="padding:0.5rem 1rem; border:none; background:#635BFF; color:white; border-radius:4px; cursor:pointer;">Pay</button>
 				</div>
 			</div>
@@ -115,14 +114,13 @@ const SHIPPING = 5;
 
 		<script type="module">
 			import { Cart } from '/cart.js';
-			const SHIPPING = 5;
-			const BUTTON_TEXT = 'Buy Astrolabe Elements Pendant - $35';
+			const SHIPPING = 6;
 			// Mapping of product IDs to display names and prices
 			// note that this does not include the shipping cost
 			// but I include the shipping cost on the "Buy this" buttons
 			const PRODUCTS = {
-				price_1RIy7IFP96aIwR2hBxHF2Kq6: { name: 'Astrolabe Elements Pendant', price: 30 },
-				price_1QfVfMFP96aIwR2haxAysFVG: { name: 'Venus Orbit Epicycle', price: 31.63 },
+				price_1RIy7IFP96aIwR2hBxHF2Kq6: { name: 'Astrolabe Elements pendant', price: 30 },
+				price_1QfVfMFP96aIwR2haxAysFVG: { name: 'Venus Orbit Epicycle necklace', price: 30.63 },
 			};
 
 			function updateCartUI() {
