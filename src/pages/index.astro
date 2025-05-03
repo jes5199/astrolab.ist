@@ -197,6 +197,7 @@ const SHIPP = 5;
 						const totalSpan = document.createElement('span');
 						totalSpan.textContent = `$${lineTotal.toFixed(2)}`;
 						totalSpan.style.width = '80px';
+						totalSpan.style.textAlign = 'right';
 
 						const removeBtn = document.createElement('button');
 						removeBtn.textContent = '×';
@@ -236,14 +237,51 @@ const SHIPP = 5;
 					// Charge shipping once per cart
 					if (items.length > 0) {
 						const liShip = document.createElement('li');
-						liShip.style.textAlign = 'right';
-						liShip.textContent = `Shipping:  $${SHIPPING.toFixed(2)}`;
+						liShip.style.display = 'flex';
+						liShip.style.justifyContent = 'flex-end';
+						liShip.style.marginBottom = '0.5rem';
+						
+						const shippingText = document.createElement('span');
+						shippingText.textContent = `Shipping:`;
+						
+						const shippingPrice = document.createElement('span');
+						shippingPrice.textContent = `$${SHIPPING.toFixed(2)}`;
+						shippingPrice.style.width = '80px';
+						shippingPrice.style.textAlign = 'right';
+						
+						// Create an empty div with the same width as the remove button
+						const spacer = document.createElement('div');
+						spacer.style.width = '20px'; // Approximate width of the X button
+						
+						liShip.appendChild(shippingText);
+						liShip.appendChild(shippingPrice);
+						liShip.appendChild(spacer);
 						itemsList.appendChild(liShip);
 					}
 				}
 				if (totalEl) {
 					const total = subtotal + (items.length > 0 ? SHIPPING : 0);
-					totalEl.textContent = `Total: $${total.toFixed(2)}`;
+					totalEl.innerHTML = ''; // Clear existing content
+					
+					const totalText = document.createElement('span');
+					totalText.textContent = 'Total:';
+					totalText.style.fontWeight = 'bold';
+					
+					const totalPrice = document.createElement('span');
+					totalPrice.textContent = `$${total.toFixed(2)}`;
+					totalPrice.style.width = '80px';
+					totalPrice.style.textAlign = 'right';
+					totalPrice.style.fontWeight = 'bold';
+					
+					// Create spacer for alignment
+					const spacer = document.createElement('div');
+					spacer.style.width = '20px';
+					
+					totalEl.style.display = 'flex';
+					totalEl.style.justifyContent = 'flex-end';
+					totalEl.appendChild(totalText);
+					totalEl.appendChild(totalPrice);
+					totalEl.appendChild(spacer);
 				}
 			}
 
