@@ -182,6 +182,7 @@ const SHIPP = 5;
 						const qtyInput = document.createElement('input');
 						qtyInput.type = 'number';
 						qtyInput.min = '1';
+						qtyInput.max = '10';
 						qtyInput.value = item.quantity;
 						qtyInput.dataset.priceId = item.priceId;
 						qtyInput.style.width = '3em';
@@ -196,7 +197,7 @@ const SHIPP = 5;
 
 						const totalSpan = document.createElement('span');
 						totalSpan.textContent = `$${lineTotal.toFixed(2)}`;
-						totalSpan.style.width = '80px';
+						totalSpan.style.width = '100px';
 						totalSpan.style.textAlign = 'right';
 
 						const removeBtn = document.createElement('button');
@@ -246,7 +247,7 @@ const SHIPP = 5;
 						
 						const shippingPrice = document.createElement('span');
 						shippingPrice.textContent = `$${SHIPPING.toFixed(2)}`;
-						shippingPrice.style.width = '80px';
+						shippingPrice.style.width = '100px';
 						shippingPrice.style.textAlign = 'right';
 						
 						// Create an empty div with the same width as the remove button
@@ -269,7 +270,7 @@ const SHIPP = 5;
 					
 					const totalPrice = document.createElement('span');
 					totalPrice.textContent = `$${total.toFixed(2)}`;
-					totalPrice.style.width = '80px';
+					totalPrice.style.width = '100px';
 					totalPrice.style.textAlign = 'right';
 					totalPrice.style.fontWeight = 'bold';
 					
@@ -293,7 +294,14 @@ const SHIPP = 5;
 
 			function handleAddToCart(event) {
 				event.preventDefault();
-				Cart.addItem('price_1RIy7IFP96aIwR2hBxHF2Kq6');
+				const priceId = 'price_1RIy7IFP96aIwR2hBxHF2Kq6';
+				const currentItems = Cart.getItems();
+				const existingItem = currentItems.find(item => item.priceId === priceId);
+				
+				if (!existingItem || existingItem.quantity < 10) {
+					Cart.addItem(priceId);
+				}
+				
 				renderCartItems();
 				updateCartUI();
 				showModal();
@@ -309,7 +317,14 @@ const SHIPP = 5;
 				const addBtnVenus = document.getElementById('add-to-cart-btn-venus');
 				addBtnVenus?.addEventListener('click', (event) => {
 					event.preventDefault();
-					Cart.addItem('price_1QfVfMFP96aIwR2haxAysFVG');
+					const priceId = 'price_1QfVfMFP96aIwR2haxAysFVG';
+					const currentItems = Cart.getItems();
+					const existingItem = currentItems.find(item => item.priceId === priceId);
+					
+					if (!existingItem || existingItem.quantity < 10) {
+						Cart.addItem(priceId);
+					}
+					
 					renderCartItems();
 					updateCartUI();
 					showModal();
