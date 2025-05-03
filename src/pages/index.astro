@@ -93,7 +93,7 @@ const SHIPP = 5;
 		<Footer />
 		<!-- Cart Modal -->
 		<div id="cart-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
-			<div style="background:white; padding:2rem; border-radius:8px; width:90%; max-width:400px;">
+			<div style="background:white; padding:2rem; border-radius:8px; width:90%; max-width:450px;">
 				<ul id="cart-items" style="list-style:none; padding:0; margin:1rem 0;"></ul>
 				<div id="cart-total" style="font-weight:bold; margin-bottom:1rem; text-align: right;">Total: $0</div>
 				<div style="margin-bottom:1rem; display:flex; align-items:center;">
@@ -163,14 +163,21 @@ const SHIPP = 5;
 						const lineTotal = prod.price * item.quantity;
 						const li = document.createElement('li');
 						li.style.display = 'flex';
-						li.style.justifyContent = 'space-between';
+						li.style.flexDirection = 'row';
 						li.style.alignItems = 'center';
 						li.style.marginBottom = '0.5rem';
+						li.style.flexWrap = 'wrap';
+						li.style.justifyContent = 'flex-start';
 
 						const nameSpan = document.createElement('span');
 						nameSpan.textContent = prod.name;
 						nameSpan.style.fontFamily = 'monospace';
 						nameSpan.style.fontSize = '0.85rem';
+						nameSpan.style.whiteSpace = 'nowrap';
+						nameSpan.style.width = '250px';
+
+						const spacer = document.createElement('div');
+						spacer.style.flex = '1';
 
 						const qtyInput = document.createElement('input');
 						qtyInput.type = 'number';
@@ -189,6 +196,7 @@ const SHIPP = 5;
 
 						const totalSpan = document.createElement('span');
 						totalSpan.textContent = `$${lineTotal.toFixed(2)}`;
+						totalSpan.style.width = '80px';
 
 						const removeBtn = document.createElement('button');
 						removeBtn.textContent = '×';
@@ -204,10 +212,23 @@ const SHIPP = 5;
 							renderCartItems();
 						});
 
-						li.appendChild(nameSpan);
-						li.appendChild(qtyInput);
-						li.appendChild(totalSpan);
-						li.appendChild(removeBtn);
+						const rightGroup = document.createElement('div');
+						rightGroup.style.display = 'flex';
+						rightGroup.style.alignItems = 'center';
+						rightGroup.style.flex = '0 0 auto';
+						rightGroup.style.marginLeft = 'auto';
+						rightGroup.appendChild(qtyInput);
+						rightGroup.appendChild(totalSpan);
+						rightGroup.appendChild(removeBtn);
+
+						const leftGroup = document.createElement('div');
+						leftGroup.style.display = 'flex';
+						leftGroup.style.alignItems = 'center';
+						leftGroup.style.flex = '0 0 250px';
+						leftGroup.appendChild(nameSpan);
+
+						li.appendChild(leftGroup);
+						li.appendChild(rightGroup);
 						itemsList.appendChild(li);
 
 						subtotal += lineTotal;
