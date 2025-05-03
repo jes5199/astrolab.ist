@@ -8,12 +8,29 @@ import { SITE_TITLE } from '../consts';
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Order Success - ${SITE_TITLE}`} description="Thank you for your order" />
+		<BaseHead title={`Order Canceled - ${SITE_TITLE}`} description="Your order was not completed" />
 	</head>
 	<body>
 		<Header />
 		<main style="max-width: 600px; margin: 4rem auto; padding: 0 1rem; text-align: center;">
-			<h1 style="margin-bottom: 2rem;">Thanks. I'll have this in the mail as soon as possible!</h1>
+			<h1 style="margin-bottom: 2rem;">Your order was not completed</h1>
+			<p style="margin-bottom: 2rem;">Something went wrong with the checkout process. You can try again or contact us if you need help.</p>
+			
+			<div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
+				<a 
+					href="/"
+					style="display: inline-block; background-color: #635BFF; color: white; padding: 0.75rem 1.5rem; border-radius: 0.25rem; text-decoration: none; font-weight: bold;"
+				>
+					Try Again
+				</a>
+				<a 
+					href="mailto:jes@astrolab.ist"
+					style="display: inline-block; background-color: #ccc; color: black; padding: 0.75rem 1.5rem; border-radius: 0.25rem; text-decoration: none; font-weight: bold;"
+				>
+					Contact Me Directly
+				</a>
+			</div>
+
 			<p style="margin-bottom: 2rem;">Sign up for my mailing list to find out when new things launch</p>
 			
 			<form
@@ -44,9 +61,5 @@ import { SITE_TITLE } from '../consts';
 			</form>
 		</main>
 		<Footer />
-		<script type="module">
-			import { Cart } from '/cart.js';
-			Cart.clear();
-		</script>
 	</body>
 </html> 
