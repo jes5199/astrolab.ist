@@ -206,7 +206,10 @@ const SHIPP = 5;
 						qtyInput.style.width = '3em';
 						qtyInput.style.margin = '0 0.5rem';
 						qtyInput.addEventListener('change', (e) => {
-							const newQty = parseInt(e.target.value);
+							let newQty = parseInt(e.target.value);
+							// Enforce min/max constraints
+							newQty = Math.max(1, Math.min(10, newQty));
+							e.target.value = newQty; // Update input to valid value
 							Cart.updateQuantity(item.priceId, newQty);
 							if (Cart.getItems().length === 0) hideModal();
 							updateCartUI();
