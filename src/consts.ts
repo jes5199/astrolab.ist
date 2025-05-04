@@ -2,4 +2,4 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 export const SITE_TITLE = 'Astrolabist';
-export const SITE_DESCRIPTION = 'A Treatise on the Astrolabe';
+export const SITE_DESCRIPTION = 'art and information';
